@@ -1,0 +1,21 @@
+{
+    "name": "blackscorp/simplexnoise",
+    "description": "Simplex Noise algorithm written in PHP to generate a random noise",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BlackScorp\\SimplexNoise\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vitalij Mik",
+            "email": "cccpmik+composer@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">7"
+    }
+}

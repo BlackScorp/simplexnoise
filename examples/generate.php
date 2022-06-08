@@ -17,7 +17,7 @@ $gradient = imagecreatefrompng(__DIR__ . '/gradients/' . $gradient);
 
 $colors = [];
 
-for ($i = 0; $i < 255; $i++) {
+for ($i = 0; $i < 256; $i++) {
     $colors[] = imagecolorat($gradient, $i, 1);
 }
 

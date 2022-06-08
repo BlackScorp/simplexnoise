@@ -69,8 +69,10 @@ $gradients = glob(__DIR__ . '/gradients/*.png');
 
         <?php foreach ($gradients as $gradient):
             $value = basename($gradient);
+            $isSelected = $_GET['gradient'] ?? 'greyscale.png' === $value;
             ?>
-            <div><input type="radio" name="gradient" value="<?= $value ?>"><img src="gradients/<?= $value ?>"></div>
+            <div><input type="radio" name="gradient" value="<?= $value ?>" <?= $isSelected ? "checked" : "" ?>><img
+                        src="gradients/<?= $value ?>"></div>
         <?php endforeach; ?>
 
 

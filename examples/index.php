@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 error_reporting(E_ALL);
 $gradients = glob(__DIR__ . '/gradients/*.png');
 
@@ -67,13 +68,15 @@ $gradients = glob(__DIR__ . '/gradients/*.png');
     <div>
 
 
-        <?php foreach ($gradients as $gradient):
+        <?php
+        foreach ($gradients as $gradient):
             $value = basename($gradient);
             $isSelected = $_GET['gradient'] ?? 'greyscale.png' === $value;
             ?>
             <div><input type="radio" name="gradient" value="<?= $value ?>" <?= $isSelected ? "checked" : "" ?>><img
                         src="gradients/<?= $value ?>"></div>
-        <?php endforeach; ?>
+        <?php
+        endforeach; ?>
 
 
     </div>

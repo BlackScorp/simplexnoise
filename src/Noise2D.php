@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace BlackScorp\SimplexNoise;
 
@@ -28,7 +29,6 @@ final class Noise2D
 
         $this->F2 = 0.5 * (sqrt(3.0) - 1.0);
         $this->G2 = (3.0 - sqrt(3.0)) / 6.0;
-
     }
 
     public function getGreyValue(int $x, int $y): int
@@ -53,7 +53,6 @@ final class Noise2D
 
     public function noise(float $x, float $y): float
     {
-
         $s = ($x + $y) * $this->F2;
 
         $i = ~~($x + $s);
@@ -110,7 +109,7 @@ final class Noise2D
             $value += $amplitude * abs($normalized);
             $x *= $this->frequency;
             $y *= $this->frequency;
-            $amplitude *=  $this->amplitude;
+            $amplitude *= $this->amplitude;
         }
         return $value;
     }

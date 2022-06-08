@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -33,7 +34,6 @@ $noise2D = new \BlackScorp\SimplexNoise\Noise2D((float)$zoom, (int)$octaves, (fl
 
 for ($x = 0; $x < $mapWidth; $x++) {
     for ($y = 0; $y < $mapHeight; $y++) {
-
         $locationX = $offsetX + $x;
         $locationY = $offsetY + $y;
         $greyValue = $noise2D->getGreyValue($locationX, $locationY);
@@ -43,7 +43,18 @@ for ($x = 0; $x < $mapWidth; $x++) {
 }
 
 
-imagecopyresampled($displayImage, $noiseImage, 0, 0, 0, 0, $displayWidth, $displayHeight, (int)$mapWidth, (int)$mapHeight);
+imagecopyresampled(
+    $displayImage,
+    $noiseImage,
+    0,
+    0,
+    0,
+    0,
+    $displayWidth,
+    $displayHeight,
+    (int)$mapWidth,
+    (int)$mapHeight
+);
 
 
 header('Content-Type:image/png');

@@ -53,17 +53,17 @@ $gradients = glob(__DIR__ . '/gradients/*.png');
     <div><label for="zoom">Zoom:</label> <input type="text" id="zoom" name="zoom" value="<?= $_GET['zoom'] ?? 0.025 ?>">
         <small>show a region of subpixel</small>
     </div>
+    <div><label for="zoom">Elevation:</label> <input type="text" id="elevation" name="elevation"
+                                                     value="<?= $_GET['elevation'] ?? 1.0 ?>">
+        <small>Higher Value = more white pixel</small>
+    </div>
     <div><label for="octaves">Octaves:</label> <input type="text" id="octaves" name="octaves"
                                                       value="<?= $_GET['octaves'] ?? 4 ?>">
         <small>Repeated interpolations, lager number = slower generation but more details</small>
     </div>
-    <div><label for="zoom">Frequency:</label> <input type="text" id="frequency" name="frequency"
-                                                     value="<?= $_GET['frequency'] ?? 2.0 ?>">
-        <small>Bumpiness of the map</small>
-    </div>
-    <div><label for="zoom">Amplitude:</label> <input type="text" id="amplitude" name="amplitude"
-                                                     value="<?= $_GET['amplitude'] ?? 0.5 ?>">
-        <small>Heigh of the map, higher number= more white pixels, lower number = more black pixels</small>
+    <div><label for="zoom">Persistence:</label> <input type="text" id="persistence" name="persistence"
+                                                     value="<?= $_GET['persistence'] ?? 0.5 ?>">
+        <small>More Details of the map</small>
     </div>
     <div>
 

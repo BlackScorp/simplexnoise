@@ -10,18 +10,21 @@ final class Noise2D
     private array $points = [];
     private float $F2;
     private float $G2;
-    private float $amplitude;
-    private float $frequency;
+    private float $persistence;
     private int $octaves;
     private float $zoom;
+    private float $elevation;
 
-    public function __construct(float $zoom = 0.025, int $octaves = 4, float $frequency = 2.0, float $amplitude = 0.5)
-    {
-        $this->amplitude = $amplitude;
-        $this->frequency = $frequency;
+    public function __construct(
+        float $zoom = 0.025,
+        int $octaves = 4,
+        float $persistence = 0.5,
+        float $elevation = 0.0
+    ) {
+        $this->persistence = $persistence;
         $this->octaves = $octaves;
         $this->zoom = $zoom;
-
+        $this->elevation = $elevation;
         for ($i = 0; $i < 512; $i++) {
             $value = NoiseData::PSEUDO_RANDOM_POINTS[$i & 255];
             $this->points[$i] = $value;
@@ -100,25 +103,20 @@ final class Noise2D
 
     public function fbm(float $x, float $y): float
     {
-        $value = 0.0;
-        $amplitude = $this->amplitude;
+        $value = $this->elevation;
 
-        for ($i = 0; $i < $this->octaves; $i++) {
-            $noise = $this->noise($x, $y);
-            $normalized = $this->normalizeNoise($noise);
+        $maxValue = $this->elevation;
+        $frequency = 1.0;
+        $amplitude = 1.0;
+        $persistence = $this->persistence;
 
-            $value += $amplitude * abs($normalized);
-            $x *= $this->frequency;
-            $y *= $this->frequency;
-            $amplitude *= $this->amplitude;
+        for ($octave = 0; $octave < $this->octaves; $octave++) {
+            $value += $this->noise($x * $frequency, $y * $frequency) * $amplitude;
+            $maxValue += $amplitude;
+            $amplitude *= $persistence;
+            $frequency *= 2.0;
         }
-        return $value;
-    }
-
-
-    private function normalizeNoise(float $noiseValue): float
-    {
-        return ($noiseValue + 1) / 2;
+        return $value / $maxValue;
     }
 
 

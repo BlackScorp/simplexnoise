@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -10,8 +11,8 @@ $offsetY = $_GET['y'] ?? 0;
 $scale = $_GET['scale'] ?? 5;
 $zoom = $_GET['zoom'] ?? 0.025;
 $octaves = $_GET['octaves'] ?? 4;
-$frequency = $_GET['frequency'] ?? 2.0;
-$amplitude = $_GET['amplitude'] ?? 0.5;
+$persistence = $_GET['persistence'] ?? 0.5;
+$elevation = $_GET['elevation'] ?? 1.0;
 $gradient = $_GET['gradient'] ?? 'greyscale.png';
 
 $gradient = imagecreatefrompng(__DIR__ . '/gradients/' . $gradient);
@@ -30,7 +31,12 @@ $displayHeight = $mapHeight * $scale;
 $noiseImage = imagecreatetruecolor((int)$mapWidth, (int)$mapHeight);
 $displayImage = imagecreatetruecolor($displayWidth, $displayHeight);
 
-$noise2D = new \BlackScorp\SimplexNoise\Noise2D((float)$zoom, (int)$octaves, (float)$frequency, (float)$amplitude);
+$noise2D = new \BlackScorp\SimplexNoise\Noise2D(
+    (float)$zoom,
+    (int)$octaves,
+    (float)$persistence,
+    (float)$elevation
+);
 
 for ($x = 0; $x < $mapWidth; $x++) {
     for ($y = 0; $y < $mapHeight; $y++) {

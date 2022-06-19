@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-error_reporting(E_ALL);
+error_reporting(-1);
 $gradients = glob(__DIR__ . '/gradients/*.png');
 
 ?>

@@ -35,13 +35,19 @@ final class Noise2D
         $this->G2 = (3.0 - sqrt(3.0)) / 6.0;
     }
 
+    private function fastFloor(float $value): int
+    {
+        $intValue = (int)$value;
+        return $value < $intValue ? $intValue - 1 : $intValue;
+    }
+
     public function getGreyValue(int $x, int $y): int
     {
         $x = $x * $this->zoom;
         $y = $y * $this->zoom;
         $noise = $this->fbm($x, $y);
 
-        return ~~$this->interpolate(0, 255, $noise);
+        return $this->fastFloor($this->interpolate(0, 255, $noise));
     }
 
     public function interpolate(float $x, float $y, float $alpha)
@@ -59,8 +65,8 @@ final class Noise2D
     {
         $s = ($x + $y) * $this->F2;
 
-        $i = ~~($x + $s);
-        $j = ~~($y + $s);
+        $i = $this->fastFloor($x + $s);
+        $j = $this->fastFloor($y + $s);
 
         $t = ($i + $j) * $this->G2;
 
